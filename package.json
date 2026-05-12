@@ -1,0 +1,20 @@
+{
+	"name": "schwabauerfamily",
+	"version": "0.0.1",
+	"private": true,
+	"type": "module",
+	"description": "schwabauer.family — a tiny private site for our family. Built on Cloudflare Workers + SvelteKit + delightstack.",
+	"scripts": {
+		"dev": "pnpm -C app dev",
+		"build": "pnpm -C app build",
+		"deploy": "pnpm -C app deploy",
+		"check": "pnpm -C app check",
+		"format": "pnpm -C app format",
+		"build:deps": "pnpm -C delightstack/packages/utilities build && pnpm -C delightstack/packages/components build",
+		"postinstall": "(pnpm -C delightstack/packages/utilities build && pnpm -C delightstack/packages/components build) || true"
+	},
+	"packageManager": "pnpm@10.18.0",
+	"engines": {
+		"node": ">=20"
+	}
+}
