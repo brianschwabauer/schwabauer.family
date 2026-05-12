@@ -1,5 +1,6 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
+  import { Button } from "@delightstack/components";
   import Fireworks from "./Fireworks.svelte";
   import type { PageProps } from "./$types";
 
@@ -208,9 +209,15 @@
             <p class="form-error">{form.error}</p>
           {/if}
 
-          <button type="submit" class="submit" disabled={submitting}>
+          <Button
+            type="submit"
+            size="3"
+            pill
+            loading={submitting}
+            disabled={submitting}
+          >
             {submitting ? "Saving…" : "I'll be there"}
-          </button>
+          </Button>
         </form>
       </div>
 
@@ -234,17 +241,25 @@
             {/each}
           </ul>
           {#if !showAll && overflow > 0}
-            <button type="button" class="more" onclick={() => (showAll = true)}>
+            <Button
+              transparent
+              outline
+              fullWidth
+              dense
+              onclick={() => (showAll = true)}
+            >
               +{overflow} more
-            </button>
+            </Button>
           {:else if showAll && data.rsvps.length > 5}
-            <button
-              type="button"
-              class="more"
+            <Button
+              transparent
+              outline
+              fullWidth
+              dense
               onclick={() => (showAll = false)}
             >
               Show fewer
-            </button>
+            </Button>
           {/if}
         {/if}
       </div>
@@ -338,9 +353,13 @@
     display: grid;
     gap: 1.5rem;
     padding-block: clamp(2.5rem, 8vw, 5rem);
+    /* Pass clicks straight through to the fireworks canvas below — every
+       pixel of the hero, including titles and stats cards, spawns a burst. */
     pointer-events: none;
   }
-  .hero-content > * {
+  .hero-content :global(a),
+  .hero-content :global(button) {
+    /* Re-enable interactivity on actual controls if added back later. */
     pointer-events: auto;
   }
   .back {
@@ -397,16 +416,53 @@
     font-size: 1.1em;
     margin-top: -0.05em;
     display: inline-block;
-    transform-origin: left center;
-    animation: run-tilt 4s ease-in-out infinite;
+    transform-origin: 30% 80%;
+    animation: run-tilt 9s var(--ease-out) infinite;
   }
+  /*
+   * Most of the cycle is a slow lean/bob; two short bursts in the middle and
+   * near the end shove the word a few rem to the right and back like it just
+   * sprinted, complete with a little squash-and-stretch.
+   */
   @keyframes run-tilt {
-    0%,
-    100% {
-      transform: rotate(-2deg) translateX(0);
+    0% {
+      transform: rotate(-2deg) translateX(0) scaleX(1);
     }
-    50% {
-      transform: rotate(1deg) translateX(0.5rem);
+    15% {
+      transform: rotate(-1deg) translateX(0.4rem) scaleX(1);
+    }
+    28% {
+      transform: rotate(1deg) translateX(-0.3rem) scaleX(1);
+    }
+    /* dash right */
+    34% {
+      transform: rotate(-4deg) translateX(0.4rem) scaleX(0.94) scaleY(1.04);
+    }
+    40% {
+      transform: rotate(-2deg) translateX(2.4rem) scaleX(1.08) scaleY(0.96);
+    }
+    46% {
+      transform: rotate(1deg) translateX(0.6rem) scaleX(0.98);
+    }
+    /* settle + slow bob */
+    58% {
+      transform: rotate(-1deg) translateX(-0.2rem) scaleX(1);
+    }
+    72% {
+      transform: rotate(0.5deg) translateX(0.3rem) scaleX(1);
+    }
+    /* dash left */
+    80% {
+      transform: rotate(4deg) translateX(-0.5rem) scaleX(0.94) scaleY(1.04);
+    }
+    86% {
+      transform: rotate(2deg) translateX(-2.8rem) scaleX(1.08) scaleY(0.96);
+    }
+    92% {
+      transform: rotate(-1deg) translateX(-0.6rem) scaleX(0.98);
+    }
+    100% {
+      transform: rotate(-2deg) translateX(0) scaleX(1);
     }
   }
   .tagline {
@@ -683,29 +739,6 @@
     font-size: 0.92rem;
     font-weight: 500;
   }
-  .submit {
-    justify-self: start;
-    padding: 1rem 2rem;
-    border-radius: var(--radius-pill);
-    background: linear-gradient(135deg, var(--c-red), var(--c-red-deep));
-    color: #fff;
-    font-weight: 700;
-    letter-spacing: 0.02em;
-    font-size: 1.05rem;
-    box-shadow: var(--c-shadow);
-    transition:
-      transform 180ms var(--ease-out),
-      box-shadow 180ms;
-  }
-  .submit:hover:not(:disabled) {
-    transform: translateY(-2px);
-    box-shadow: var(--c-shadow-lg);
-  }
-  .submit:disabled {
-    opacity: 0.7;
-    cursor: progress;
-  }
-
   .rsvp-list {
     background: var(--c-cream);
     border: 1px solid var(--c-line);
@@ -756,21 +789,8 @@
     margin-top: 0.15rem;
     font-style: italic;
   }
-  .more {
+  .rsvp-list :global(.button) {
     margin-top: 1rem;
-    width: 100%;
-    padding: 0.65rem 0.85rem;
-    border: 1.5px dashed var(--c-line);
-    border-radius: var(--radius);
-    color: var(--c-ink-mute);
-    font-weight: 600;
-    transition:
-      background 160ms,
-      color 160ms;
-  }
-  .more:hover {
-    background: var(--c-paper-2);
-    color: var(--c-ink);
   }
   .empty {
     color: var(--c-ink-mute);

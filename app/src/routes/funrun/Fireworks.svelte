@@ -49,11 +49,13 @@
 
   function launch(targetX: number, targetY: number) {
     const colors = pickPalette();
+    // Stronger initial velocity so rockets aimed near the top of the hero
+    // actually reach it before gravity stalls them.
     rockets.push({
       x: targetX + rand(-30, 30),
       y: height + 10,
       vx: rand(-1.2, 1.2),
-      vy: rand(-13, -10),
+      vy: rand(-17, -13),
       targetY,
       color: colors[0],
       trail: [],
@@ -114,7 +116,11 @@
 
   function spawnRandom() {
     if (rockets.length > 6 || particles.length > 1000) return;
-    launch(rand(width * 0.1, width * 0.9), rand(height * 0.15, height * 0.55));
+    // ~35% of auto-launches target near the top of the hero (within ~100px),
+    // the rest fill the middle band.
+    const targetY =
+      Math.random() < 0.35 ? rand(30, 110) : rand(height * 0.2, height * 0.55);
+    launch(rand(width * 0.1, width * 0.9), targetY);
   }
 
   function resize() {

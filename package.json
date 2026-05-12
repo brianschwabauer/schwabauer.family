@@ -10,8 +10,8 @@
 		"deploy": "pnpm -C app deploy",
 		"check": "pnpm -C app check",
 		"format": "pnpm -C app format",
-		"build:deps": "pnpm -C delightstack/packages/utilities build && pnpm -C delightstack/packages/components build",
-		"postinstall": "(pnpm -C delightstack/packages/utilities build && pnpm -C delightstack/packages/components build) || true"
+		"build:deps": "node scripts/seed-dist-tsconfig.mjs && pnpm -C delightstack/packages/utilities build && pnpm -C delightstack/packages/components build && node scripts/seed-dist-tsconfig.mjs",
+		"postinstall": "(node scripts/seed-dist-tsconfig.mjs && pnpm -C delightstack/packages/utilities build && pnpm -C delightstack/packages/components build && node scripts/seed-dist-tsconfig.mjs) || true"
 	},
 	"packageManager": "pnpm@10.18.0",
 	"engines": {
