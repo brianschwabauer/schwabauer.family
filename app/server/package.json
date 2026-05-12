@@ -1,15 +1,15 @@
 {
-	"name": "@schwabauerfamily/server",
-	"version": "0.0.1",
-	"private": true,
-	"type": "module",
-	"scripts": {
-		"dev": "wrangler dev --config wrangler.toml --port 8787 --persist-to ../.wrangler/state",
-		"deploy": "wrangler deploy --config wrangler.toml"
-	},
-	"devDependencies": {
-		"@cloudflare/workers-types": "^4.20260401.1",
-		"typescript": "^5.9.3",
-		"wrangler": "^4.79.0"
-	}
+  "name": "@schwabauerfamily/server",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "wrangler dev --config wrangler.toml --port 8787 --persist-to ../.wrangler/state",
+    "deploy": "wrangler deploy --config wrangler.toml"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260401.1",
+    "typescript": "^5.9.3",
+    "wrangler": "^4.79.0"
+  }
 }

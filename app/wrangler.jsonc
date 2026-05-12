@@ -1,23 +1,23 @@
 {
-	"$schema": "node_modules/wrangler/config-schema.json",
-	"name": "schwabauerfamily",
-	"main": ".svelte-kit/cloudflare/_worker.js",
-	"compatibility_date": "2026-04-01",
-	"compatibility_flags": ["nodejs_compat"],
-	"workers_dev": false,
-	"observability": { "enabled": true },
-	"assets": {
-		"directory": ".svelte-kit/cloudflare",
-		"binding": "ASSETS"
-	},
-	"services": [
-		// In production this is a real service binding to the deployed DO worker.
-		// In dev, getPlatformProxy connects to the locally running `wrangler dev`
-		// instance of the same service by name.
-		{ "binding": "SERVER", "service": "schwabauerfamily-server" }
-	],
-	"routes": [
-		{ "pattern": "schwabauer.family", "custom_domain": true },
-		{ "pattern": "www.schwabauer.family", "custom_domain": true }
-	]
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "schwabauerfamily",
+  "main": ".svelte-kit/cloudflare/_worker.js",
+  "compatibility_date": "2026-04-01",
+  "compatibility_flags": ["nodejs_compat"],
+  "workers_dev": false,
+  "observability": { "enabled": true },
+  "assets": {
+    "directory": ".svelte-kit/cloudflare",
+    "binding": "ASSETS",
+  },
+  "services": [
+    // In production this is a real service binding to the deployed DO worker.
+    // In dev, getPlatformProxy connects to the locally running `wrangler dev`
+    // instance of the same service by name.
+    { "binding": "SERVER", "service": "schwabauerfamily-server" },
+  ],
+  "routes": [
+    { "pattern": "schwabauer.family", "custom_domain": true },
+    { "pattern": "www.schwabauer.family", "custom_domain": true },
+  ],
 }

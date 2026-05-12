@@ -1,39 +1,39 @@
 {
-	"name": "@schwabauerfamily/app",
-	"version": "0.0.1",
-	"private": true,
-	"type": "module",
-	"scripts": {
-		"dev": "concurrently -k -n server,svelte -c blue,green \"pnpm dev:server\" \"pnpm dev:svelte\"",
-		"dev:server": "pnpm -C server dev",
-		"dev:svelte": "vite dev --port 5175",
-		"build": "vite build",
-		"preview": "pnpm build && wrangler dev",
-		"deploy": "pnpm -C server deploy && pnpm build && wrangler deploy",
-		"check": "tsgo --noEmit || tsc --noEmit",
-		"format": "oxfmt . || prettier --write .",
-		"lint": "oxlint . || true"
-	},
-	"devDependencies": {
-		"@cloudflare/workers-types": "^4.20260401.1",
-		"@sveltejs/adapter-cloudflare": "^7.2.8",
-		"@sveltejs/kit": "^2.55.0",
-		"@sveltejs/vite-plugin-svelte": "^6.2.1",
-		"@typescript/native-preview": "latest",
-		"concurrently": "^9.1.0",
-		"oxfmt": "latest",
-		"oxlint": "latest",
-		"prettier": "^3.4.2",
-		"prettier-plugin-svelte": "^3.3.3",
-		"svelte": "^5.55.1",
-		"svelte-check": "^4.3.0",
-		"typescript": "^5.9.3",
-		"vite": "^7.3.1",
-		"wrangler": "^4.79.0"
-	},
-	"dependencies": {
-		"@delightstack/auth": "workspace:*",
-		"@delightstack/components": "workspace:*",
-		"@delightstack/utilities": "workspace:*"
-	}
+  "name": "@schwabauerfamily/app",
+  "version": "0.0.1",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "concurrently -k -n server,svelte -c blue,green \"pnpm dev:server\" \"pnpm dev:svelte\"",
+    "dev:server": "pnpm -C server dev",
+    "dev:svelte": "vite dev --port 5175",
+    "build": "vite build",
+    "preview": "pnpm build && wrangler dev",
+    "deploy": "pnpm -C server deploy && pnpm build && wrangler deploy",
+    "check": "tsgo --noEmit || tsc --noEmit",
+    "format": "oxfmt . || prettier --write .",
+    "lint": "oxlint . || true"
+  },
+  "dependencies": {
+    "@delightstack/auth": "workspace:*",
+    "@delightstack/components": "workspace:*",
+    "@delightstack/utilities": "workspace:*"
+  },
+  "devDependencies": {
+    "@cloudflare/workers-types": "^4.20260401.1",
+    "@sveltejs/adapter-cloudflare": "^7.2.8",
+    "@sveltejs/kit": "^2.55.0",
+    "@sveltejs/vite-plugin-svelte": "^6.2.1",
+    "@typescript/native-preview": "latest",
+    "concurrently": "^9.1.0",
+    "oxfmt": "latest",
+    "oxlint": "latest",
+    "prettier": "^3.4.2",
+    "prettier-plugin-svelte": "^3.3.3",
+    "svelte": "^5.55.1",
+    "svelte-check": "^4.3.0",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "wrangler": "^4.79.0"
+  }
 }
