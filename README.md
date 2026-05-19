@@ -32,11 +32,10 @@ Same code path in both environments — no `if (dev)` branching.
 
 ## Pages
 
-- `/` — warm hero with the family name in Fraunces display, placeholder
-  portrait, link to the fun run, "coming soon" teaser.
+- `/` — Home page where future family content will be
 - `/funrun` — landing page for **Let Freedom Run**. Animated canvas
   fireworks (click anywhere to spawn more), event details, RSVP form, live
-  who's-in list, photo gallery placeholders.
+  who's-in list, photo gallery.
 
 ## RSVPs
 
@@ -77,13 +76,6 @@ pnpm deploy
 Deploys the server worker first (so its DO class is registered before the
 SvelteKit app's service binding tries to call it), then builds and deploys
 the SvelteKit worker.
-
-## Drop-in content
-
-- Family hero photo → `app/static/family/family.jpg` (replaces the SVG
-  placeholder). No code change needed.
-- Fun-run gallery → drop images into `app/static/funrun/2025/` (the
-  previous year) and they'll appear in the gallery section.
 
 ## Stack
 
