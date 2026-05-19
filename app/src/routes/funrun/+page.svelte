@@ -16,13 +16,11 @@
 
   const firstName = (n: string) => n.split(/\s+/)[0] || n;
 
-  const galleryPlaceholders = Array.from({ length: 8 }, (_, i) => i + 1);
-
   const stats = [
+    { k: "When", v: "July 4 @ 8:30am" },
+    { k: "Where", v: "South Park Lake" },
     { k: "Distance", v: "~1 mile" },
-    { k: "Start", v: "9:00 AM sharp" },
     { k: "Donuts", v: "Many" },
-    { k: "Medals", v: "For every finisher" },
   ];
 
   // little patriotic confetti on submit success
@@ -90,23 +88,24 @@
       <article class="about">
         <h2>What is this?</h2>
         <p>
-          <strong>Let Freedom Run</strong> is our family's annual Fourth of July mile.
-          It's been a thing for two years now, which by the rules of tradition makes
-          it canon. The course is a flat loop at South Lake Park — bring kids, strollers,
-          dogs, grandparents, and anything else that rolls or walks.
+          <strong>Let Freedom Run</strong> is our family's annual Fourth of July
+          fun run. It's been a thing for {data.year - 2024} years now, which by the
+          rules of tradition makes it a big deal. The course is a flat loop at South
+          Lake Park. Bring kids, strollers, dogs, grandparents, and anything else
+          that rolls or walks.
         </p>
         <p>
-          Things kick off with an <em>opening ceremony</em> we take very, very seriously:
-          speeches of dubious quality, a torch (a Bic lighter), and vaguely patriotic
-          music played at uncomfortable volume. Then everybody runs. Or walks. Or
-          strolls. Or fakes a hamstring injury near mile 0.5 — anything goes.
+          Things kick off with an <em>opening ceremony</em> we take very, very seriously.
+          The ceremony speeches have been known to bring tears to the eyes of those
+          who have recently chopped onions. After the ceremony, we run. Or walk. Or
+          stroll. Or roll.
         </p>
         <p>
           Afterward: <strong
             >coffee, donuts, and a medal for every finisher.</strong
           >
-          Stay as long as you want. Last year someone fell asleep on the picnic blanket.
-          We're not naming names. (It was Brian.)
+          Stay as long as you want. We'll play at the playground until America turns
+          300 years old. Or until we get tired and cranky. Whichever comes first.
         </p>
       </article>
 
@@ -116,7 +115,7 @@
           <dt>📅 When</dt>
           <dd>
             Saturday, July 4, {data.year}<br /><span
-              >9:00 AM (be there 8:45)</span
+              >8:45am opening ceremony (be there 8:30)</span
             >
           </dd>
           <dt>📍 Where</dt>
@@ -132,31 +131,35 @@
             <span>7601 W 86th St, Overland Park, KS 66212</span>
           </dd>
           <dt>🅿️ Parking</dt>
-          <dd>Lot off 86th St. Overflow on the street.</dd>
+          <dd>
+            Use either parking lot off 86th St. We'll be closer to the west
+            parking lot.
+          </dd>
           <dt>⛺ Shelter</dt>
-          <dd>TBD — look for red, white, and blue balloons.</dd>
-          <dt>💰 Cost</dt>
-          <dd>Free. Bring a folding chair if you have one.</dd>
+          <dd>
+            We'll be at a shelter by the playground. Look for red, white, and
+            blue decorations. If you walk into the pond, you've gone too far.
+          </dd>
         </dl>
       </aside>
     </div>
 
     <div class="schedule">
-      <h3>Rough timeline</h3>
+      <h3>Event timeline</h3>
       <ol>
         <li>
-          <b>8:45</b> Check-in & last-second stretching of suspect quality
+          <b>8:30</b> Check-in & attempting to wake up
         </li>
         <li>
-          <b>9:00</b> Opening ceremony — anthem, speeches, an unauthorized cannon
-          (toy)
+          <b>8:45</b> Opening ceremony: National anthem. Speeches. Patriotism.
         </li>
-        <li><b>9:15</b> Race! Approximately 1 mile, almost certainly</li>
+        <li><b>9:00</b> Race! (Less than 1 mile)</li>
         <li>
-          <b>9:35</b> Medal ceremony — every finisher gets one. Yes, every.
+          <b>9:19</b> Medal ceremony. Every finisher gets a medal totally made of
+          gold.
         </li>
-        <li><b>9:45</b> Coffee, donuts, lawn-chair philosophy</li>
-        <li><b>10:30</b> Disperse, nap, prepare for evening fireworks</li>
+        <li><b>9:26</b> Coffee & donuts. Tend to your pulled hammy</li>
+        <li><b>END</b> Disperse, nap, prepare for evening fireworks</li>
       </ol>
     </div>
   </section>
@@ -198,7 +201,7 @@
             <textarea
               name="comment"
               maxlength="250"
-              placeholder="Bringing 3 kids and an irrational competitive streak."
+              placeholder="Bringing 46 kids and an irrational competitive streak."
               rows="3"
               bind:value={commentValue}
             ></textarea>
@@ -269,55 +272,30 @@
   <section class="container gallery">
     <header class="gallery-head">
       <h2>From years past</h2>
-      <p>
-        Drop new photos into <code>/static/funrun/{data.year - 1}/</code> and they'll
-        appear here next year.
-      </p>
     </header>
     <div class="gallery-grid">
-      {#each galleryPlaceholders as i (i)}
-        <figure class="g-tile" style="--i: {i}">
-          <div class="g-placeholder">
-            <svg viewBox="0 0 100 100" aria-hidden="true">
-              <rect width="100" height="100" rx="6" fill="none" />
-              <circle
-                cx="70"
-                cy="32"
-                r="10"
-                fill="currentColor"
-                opacity="0.4"
-              />
-              <path
-                d="M10 80 L35 55 L55 70 L75 50 L90 75 L90 90 L10 90 Z"
-                fill="currentColor"
-                opacity="0.55"
-              />
-            </svg>
-            <span>Photo coming soon</span>
-          </div>
-        </figure>
-      {/each}
+      <img
+        src="/funrun/schwabauer_family_fun_run_2026-invitation_page_1.avif"
+        alt="2026 invitation"
+        style="object-fit: contain;"
+      />
+      <img
+        src="/funrun/schwabauer_family_fun_run_2025-winners_photo.avif"
+        alt="2025 winners"
+      />
+      <img
+        src="/funrun/schwabauer_family_fun_run_2025-opening_ceremony_speech.avif"
+        alt="2025 opening ceremony speech"
+      />
+      <img
+        src="/funrun/schwabauer_family_fun_run_2024-group_photo.avif"
+        alt="2024 participants"
+      />
+      <img
+        src="/funrun/schwabauer_family_fun_run_2024-winners_photo.avif"
+        alt="2024 winners"
+      />
     </div>
-  </section>
-
-  <section class="container fineprint">
-    <h2>The fine print, sort of</h2>
-    <ul>
-      <li>🐕 Leashed dogs welcome — the smaller, the better.</li>
-      <li>
-        🚼 Strollers are encouraged. The bumpier the better — strengthens the
-        soul.
-      </li>
-      <li>
-        🎽 No bibs, no timing chips, no clocks. We will guess your time
-        generously.
-      </li>
-      <li>🌧️ Rain plan: same place, same time, more wet. Donuts undeterred.</li>
-      <li>
-        🎤 If you'd like to give an opening-ceremony speech, just show up with
-        notes. We trust you.
-      </li>
-    </ul>
   </section>
 
   <footer class="end">
@@ -594,7 +572,7 @@
   }
   .info-card dl {
     display: grid;
-    gap: 0.75rem;
+    gap: 0.15rem;
     margin: 0;
   }
   .info-card dt {
@@ -603,7 +581,7 @@
     letter-spacing: 0.12em;
     color: var(--c-ink-mute);
     font-weight: 700;
-    margin-top: 0.6rem;
+    margin-top: 1.25rem;
   }
   .info-card dt:first-child {
     margin-top: 0;
@@ -831,69 +809,17 @@
   }
   .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 0.8rem;
-  }
-  .g-tile {
-    margin: 0;
-    aspect-ratio: 4/3;
-    border-radius: var(--radius);
-    overflow: hidden;
-    background: var(--c-paper-2);
-    border: 1px solid var(--c-line);
-  }
-  .g-tile:nth-child(3n) {
-    aspect-ratio: 1/1;
-  }
-  .g-tile:nth-child(5n) {
-    aspect-ratio: 3/4;
-  }
-  .g-placeholder {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    color: var(--c-line);
-  }
-  .g-placeholder svg {
-    width: 40%;
-    height: auto;
-    color: var(--c-ink-mute);
-    opacity: 0.6;
-  }
-  .g-placeholder span {
-    font-size: 0.78rem;
-    color: var(--c-ink-mute);
-    font-style: italic;
-  }
-
-  .fineprint {
-    padding-block: clamp(2.5rem, 5vw, 4rem);
-  }
-  .fineprint h2 {
-    font-size: clamp(1.6rem, 3vw, 2.4rem);
-    font-style: italic;
-    font-family: var(--font-display);
-    font-weight: 400;
-    color: var(--c-ink-mute);
-    margin-bottom: 1rem;
-  }
-  .fineprint ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: grid;
-    gap: 0.65rem;
-  }
-  .fineprint li {
-    padding: 0.85rem 1rem;
-    background: var(--c-cream);
-    border: 1px solid var(--c-line);
-    border-radius: var(--radius);
-    font-size: 0.98rem;
+    img {
+      margin: 0;
+      aspect-ratio: 4/3;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--c-paper-2);
+      border: 1px solid var(--c-line);
+      object-fit: cover;
+    }
   }
 
   .end {
