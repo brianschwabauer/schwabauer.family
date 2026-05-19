@@ -97,7 +97,7 @@
   h1 {
     display: grid;
     gap: 0;
-    font-size: clamp(3.2rem, 14vw, 9rem);
+    font-size: clamp(4.5rem, 14vw, 9rem);
     letter-spacing: -0.04em;
     line-height: 0.88;
   }
@@ -140,7 +140,7 @@
     display: grid;
     grid-template-columns: 1fr;
     align-items: center;
-    gap: 1.5rem;
+    gap: 0;
     padding: 4.5rem clamp(1.5rem, 4vw, 3rem) clamp(1.5rem, 4vw, 2.5rem);
     border-radius: var(--radius-lg);
     background: linear-gradient(
@@ -190,7 +190,7 @@
     position: absolute;
     top: 1.1rem;
     right: -3rem;
-    transform: rotate(8deg);
+    transform: rotate(18deg);
     display: flex;
     gap: 1rem;
     background: var(--c-gold);
@@ -198,7 +198,7 @@
     font-weight: 700;
     font-size: 0.7rem;
     letter-spacing: 0.16em;
-    padding: 0.3rem 4rem;
+    padding: 0.3rem 4rem 0.3rem 8rem;
     text-transform: uppercase;
     white-space: nowrap;
   }
@@ -207,9 +207,13 @@
   }
   @media (min-width: 560px) {
     .cta-tape {
+      top: 1rem;
+      right: -7rem;
+      transform: rotate(10deg);
       font-size: 0.78rem;
       letter-spacing: 0.18em;
       padding: 0.35rem 4rem;
+      gap: 1.5rem;
     }
     .cta-tape span:nth-child(n + 2) {
       display: inline;
@@ -252,6 +256,7 @@
     .cta-card {
       grid-template-columns: 1fr auto;
       padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 3rem);
+      gap: 1.5rem;
     }
     .cta-star {
       width: 120px;
