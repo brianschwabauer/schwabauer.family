@@ -16,8 +16,7 @@ export const actions: Actions = {
     const name = String(form.get("name") ?? "").trim();
     const comment = String(form.get("comment") ?? "").trim() || null;
 
-    if (!name)
-      return fail(400, { name, comment, error: "Please tell us your name." });
+    if (!name) return fail(400, { name, comment, error: "Please tell us your name." });
     if (name.length > 80)
       return fail(400, {
         name,
@@ -34,8 +33,7 @@ export const actions: Actions = {
     try {
       await createRsvp(platform, EVENT_YEAR, { name, comment });
     } catch (err) {
-      const message =
-        err instanceof Error ? err.message : "Could not save RSVP.";
+      const message = err instanceof Error ? err.message : "Could not save RSVP.";
       return fail(500, { name, comment, error: message });
     }
     return { success: true };

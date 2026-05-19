@@ -9,28 +9,11 @@
 <main>
   <section class="hero">
     <div class="hero-inner container">
-      <p class="eyebrow">Est. some good while ago · Kansas City</p>
       <h1>
         <span class="the">The</span>
         <span class="name">Schwabauer</span>
         <span class="family">Family</span>
       </h1>
-      <p class="lede">
-        A small private corner of the internet for the people we love — stories,
-        pictures, and the occasional excuse to put on running shoes.
-      </p>
-
-      <figure class="portrait">
-        <img
-          src="/family/family.svg"
-          alt="The Schwabauer family. (Drop a real photo in at /static/family/family.jpg to replace.)"
-          width="1200"
-          height="800"
-          loading="eager"
-          decoding="async"
-        />
-        <figcaption>The Schwabauers — {year}</figcaption>
-      </figure>
     </div>
 
     <svg
@@ -65,7 +48,7 @@
         </p>
       </div>
       <div class="cta-star" aria-hidden="true">
-        <svg viewBox="0 0 100 100" width="120" height="120">
+        <svg viewBox="0 0 100 100" width="100%" height="100%">
           <polygon
             points="50,4 61,38 96,38 67,59 78,93 50,72 22,93 33,59 4,38 39,38"
             fill="currentColor"
@@ -108,14 +91,7 @@
   .hero-inner {
     display: grid;
     gap: clamp(2rem, 5vw, 3.5rem);
-  }
-  .eyebrow {
-    font-family: var(--font-body);
-    text-transform: uppercase;
-    letter-spacing: 0.18em;
-    font-size: 0.78rem;
-    color: var(--c-ink-mute);
-    font-weight: 600;
+    padding-block-end: clamp(3rem, 6vw, 5rem);
   }
 
   h1 {
@@ -147,52 +123,6 @@
     margin-top: -0.1em;
   }
 
-  .lede {
-    font-size: clamp(1.05rem, 1.5vw, 1.2rem);
-    color: var(--c-ink-soft);
-    max-width: 48ch;
-  }
-
-  .portrait {
-    margin: 0;
-    position: relative;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: var(--c-shadow-lg);
-    aspect-ratio: 16/10;
-    max-height: 60dvh;
-    transform: rotate(-0.6deg);
-  }
-  .portrait img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-  }
-  .portrait figcaption {
-    position: absolute;
-    left: 1.5rem;
-    bottom: 1.5rem;
-    background: var(--c-cream);
-    color: var(--c-ink);
-    padding: 0.4rem 0.85rem;
-    border-radius: var(--radius-pill);
-    font-size: 0.8rem;
-    font-weight: 600;
-    letter-spacing: 0.02em;
-    box-shadow: var(--c-shadow);
-  }
-  .portrait::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background: linear-gradient(
-      180deg,
-      transparent 60%,
-      rgba(10, 37, 64, 0.18)
-    );
-    pointer-events: none;
-  }
-
   .hero-divider {
     display: block;
     width: 100%;
@@ -208,10 +138,10 @@
   .cta-card {
     position: relative;
     display: grid;
-    grid-template-columns: 1fr auto;
+    grid-template-columns: 1fr;
     align-items: center;
     gap: 1.5rem;
-    padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 3rem);
+    padding: 4.5rem clamp(1.5rem, 4vw, 3rem) clamp(1.5rem, 4vw, 2.5rem);
     border-radius: var(--radius-lg);
     background: linear-gradient(
       135deg,
@@ -266,10 +196,24 @@
     background: var(--c-gold);
     color: var(--c-ink);
     font-weight: 700;
-    font-size: 0.78rem;
-    letter-spacing: 0.18em;
-    padding: 0.35rem 4rem;
+    font-size: 0.7rem;
+    letter-spacing: 0.16em;
+    padding: 0.3rem 4rem;
     text-transform: uppercase;
+    white-space: nowrap;
+  }
+  .cta-tape span:nth-child(n + 2) {
+    display: none;
+  }
+  @media (min-width: 560px) {
+    .cta-tape {
+      font-size: 0.78rem;
+      letter-spacing: 0.18em;
+      padding: 0.35rem 4rem;
+    }
+    .cta-tape span:nth-child(n + 2) {
+      display: inline;
+    }
   }
   .cta-body {
     z-index: 1;
@@ -290,10 +234,13 @@
     opacity: 0.9;
   }
   .cta-star {
+    width: clamp(72px, 22vw, 96px);
+    justify-self: end;
     color: var(--c-gold);
     opacity: 0.85;
     filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.25));
     animation: slow-spin 30s linear infinite;
+    line-height: 0;
   }
   @keyframes slow-spin {
     to {
@@ -301,21 +248,15 @@
     }
   }
 
-  .dot {
-    flex-shrink: 0;
-    width: 12px;
-    height: 12px;
-    border-radius: 50%;
-    margin-top: 0.55rem;
-  }
-  .dot-1 {
-    background: var(--c-red);
-  }
-  .dot-2 {
-    background: var(--c-blue);
-  }
-  .dot-3 {
-    background: var(--c-gold);
+  @media (min-width: 560px) {
+    .cta-card {
+      grid-template-columns: 1fr auto;
+      padding: clamp(1.5rem, 4vw, 2.5rem) clamp(1.5rem, 4vw, 3rem);
+    }
+    .cta-star {
+      width: 120px;
+      justify-self: auto;
+    }
   }
 
   .foot {
@@ -333,17 +274,5 @@
   .foot a:hover {
     color: var(--c-ink);
     text-decoration: underline;
-  }
-
-  @media (min-width: 880px) {
-    .hero-inner {
-      grid-template-columns: 1.05fr 1fr;
-      align-items: end;
-      padding-block-end: clamp(3rem, 6vw, 5rem);
-    }
-    .portrait {
-      align-self: stretch;
-      max-height: none;
-    }
   }
 </style>
