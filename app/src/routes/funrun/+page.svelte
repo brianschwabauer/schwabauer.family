@@ -14,8 +14,6 @@
   const visible = $derived(showAll ? data.rsvps : data.rsvps.slice(0, 5));
   const overflow = $derived(Math.max(0, data.rsvps.length - 5));
 
-  const firstName = (n: string) => n.split(/\s+/)[0] || n;
-
   const stats = [
     { k: "When", v: "July 4 @ 8:30am" },
     { k: "Where", v: "South Park Lake" },
@@ -169,8 +167,7 @@
       <div class="rsvp-form-wrap">
         <h2>Let us know you're coming</h2>
         <p class="rsvp-sub">
-          Helps us know how many donuts to buy. (Answer is always "more.") We'll
-          only show your first name publicly.
+          Helps us know how many donuts to buy. (Answer is always "more.")
         </p>
 
         <form
@@ -236,7 +233,7 @@
           <ul>
             {#each visible as r (r.id)}
               <li>
-                <div class="r-name">{firstName(r.name)}</div>
+                <div class="r-name">{r.name}</div>
                 {#if r.comment}
                   <div class="r-comment">"{r.comment}"</div>
                 {/if}
@@ -324,6 +321,15 @@
     isolation: isolate;
     overflow: hidden;
     color: #fff;
+  }
+  /* On mobile the hero is much taller than its content, so center it
+     vertically instead of letting it stack at the top with dead space below. */
+  @media (max-width: 700px) {
+    .hero {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
   }
   .hero-content {
     position: relative;
