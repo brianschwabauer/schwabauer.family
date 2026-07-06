@@ -1,6 +1,9 @@
 <script lang="ts">
   import { enhance } from "$app/forms";
-  import { Button } from "@delightstack/components";
+  import { Button, Gallery, Video } from "@delightstack/components";
+  import type { GalleryItem } from "@delightstack/components";
+
+  const CEREMONY = "/funrun/schwabauer_family_fun_run_2026-opening_ceremony";
   import Fireworks from "./Fireworks.svelte";
   import type { PageProps } from "./$types";
 
@@ -20,6 +23,111 @@
     { k: "Distance", v: "~1 mile" },
     { k: "Donuts", v: "Many" },
   ];
+
+  // Race-day photo album — this year's fun run at the top (group photo first),
+  // with previous years below. Group photos are marked `favorite` so the
+  // masonry grid renders them larger. The opening-ceremony speech video plays
+  // in its own <Video> player below the grid.
+  const F = "/funrun";
+  // `width`/`height` are the intrinsic pixel dimensions of each image — the
+  // masonry layout derives each tile's aspect ratio from them (falling back to
+  // 1:1 when absent).
+  const galleryItems: GalleryItem[] = [
+    // 2026 — this year
+    {
+      src: `${F}/schwabauer_family_fun_run_2026-group_photo.avif`,
+      width: 2048,
+      height: 1365,
+      alt: "2026 fun run group photo",
+      caption: "2026 — the whole crew",
+      favorite: true,
+    },
+    {
+      src: `${F}/schwabauer_family_fun_run_2026-kid-opening_ceremony_crowd.avif`,
+      width: 2048,
+      height: 1157,
+      alt: "Kids gathered for the 2026 opening ceremony",
+      caption: "2026 — gathering for the opening ceremony",
+    },
+    {
+      src: `${F}/schwabauer_family_fun_run_2026-kids_at_starting_line_1.avif`,
+      width: 2048,
+      height: 1157,
+      alt: "Kids at the 2026 starting line",
+      caption: "2026 — lining up",
+    },
+    {
+      src: `${F}/schwabauer_family_fun_run_2026-kids_at_starting_line_2.avif`,
+      width: 2048,
+      height: 1157,
+      alt: "Kids at the 2026 starting line",
+      caption: "2026 — ready, set…",
+    },
+    {
+      src: `${F}/schwabauer_family_fun_run_2026-race_begins.avif`,
+      width: 2048,
+      height: 1157,
+      alt: "The 2026 race begins",
+      caption: "2026 — and they're off!",
+    },
+    {
+      src: `${F}/schwabauer_family_fun_run_2026-running_on_track.avif`,
+      width: 2048,
+      height: 1157,
+      alt: "Runners on the track in 2026",
+      caption: "2026 — on the track",
+    },
+    {
+      src: `${F}/schwabauer_family_fun_run_2026-kids_after_race.avif`,
+      width: 2048,
+      height: 1536,
+      alt: "Kids after the 2026 race",
+      caption: "2026 — the finishers",
+    },
+    {
+      src: `${F}/schwabauer_family_fun_run_2026-eating_donuts.avif`,
+      width: 2048,
+      height: 1157,
+      alt: "Eating donuts after the 2026 race",
+      caption: "2026 — the real reason we run",
+    },
+    // Years past
+    {
+      src: `${F}/schwabauer_family_fun_run_2025-winners_photo.avif`,
+      width: 1838,
+      height: 1773,
+      alt: "2025 winners",
+      caption: "2025 — winners",
+    },
+    {
+      src: `${F}/schwabauer_family_fun_run_2025-opening_ceremony_speech.avif`,
+      width: 2048,
+      height: 1621,
+      alt: "2025 opening ceremony speech",
+      caption: "2025 — opening ceremony speech",
+    },
+    {
+      src: `${F}/schwabauer_family_fun_run_2024-group_photo.avif`,
+      width: 2048,
+      height: 1454,
+      alt: "2024 fun run group photo",
+      caption: "2024 — the whole crew",
+      favorite: true,
+    },
+    {
+      src: `${F}/schwabauer_family_fun_run_2024-winners_photo.avif`,
+      width: 2048,
+      height: 1612,
+      alt: "2024 winners",
+      caption: "2024 — winners",
+    },
+  ];
+
+  // The Gallery shows `name` on thumbnail hover but `caption` in the fullscreen
+  // view; mirror each caption into `name` so the label appears on hover too.
+  const galleryDisplayItems = galleryItems.map((it) =>
+    typeof it === "string" ? it : { name: it.caption, ...it },
+  );
 
   // little patriotic confetti on submit success
   let showConfetti = $state(false);
@@ -75,7 +183,8 @@
         class:red={i % 3 === 0}
         class:white={i % 3 === 1}
         class:blue={i % 3 === 2}
-      ></span>
+      >
+      </span>
     {/each}
   </div>
 </header>
@@ -86,17 +195,17 @@
       <article class="about">
         <h2>What is this?</h2>
         <p>
-          <strong>Let Freedom Run</strong> is our family's annual Fourth of July
-          fun run. It's been a thing for {data.year - 2024} years now, which by the
-          rules of tradition makes it a big deal. The course is a flat loop at South
-          Lake Park. Bring kids, strollers, dogs, grandparents, and anything else
-          that rolls or walks.
+          <strong>Let Freedom Run</strong>
+          is our family's annual Fourth of July fun run. It's been a thing for {data.year -
+            2024} years now, which by the rules of tradition makes it a big deal.
+          The course is a flat loop at South Lake Park. Bring kids, strollers, dogs,
+          grandparents, and anything else that rolls or walks.
         </p>
         <p>
-          Things kick off with an <em>opening ceremony</em> we take very, very seriously.
-          The ceremony speeches have been known to bring tears to the eyes of those
-          who have recently chopped onions. After the ceremony, we run. Or walk. Or
-          stroll. Or roll.
+          Things kick off with an <em>opening ceremony</em>
+          we take very, very seriously. The ceremony speeches have been known to bring
+          tears to the eyes of those who have recently chopped onions. After the ceremony,
+          we run. Or walk. Or stroll. Or roll.
         </p>
         <p>
           Afterward: <strong
@@ -112,9 +221,9 @@
         <dl>
           <dt>📅 When</dt>
           <dd>
-            Saturday, July 4, {data.year}<br /><span
-              >8:45am opening ceremony (be there 8:30)</span
-            >
+            Saturday, July 4, {data.year}
+            <br />
+            <span>8:45am opening ceremony (be there 8:30)</span>
           </dd>
           <dt>📍 Where</dt>
           <dd>
@@ -146,18 +255,29 @@
       <h3>Event timeline</h3>
       <ol>
         <li>
-          <b>8:30</b> Check-in & attempting to wake up
+          <b>8:30</b>
+          Check-in & attempting to wake up
         </li>
         <li>
-          <b>8:45</b> Opening ceremony: National anthem. Speeches. Patriotism.
+          <b>8:45</b>
+          Opening ceremony: National anthem. Speeches. Patriotism.
         </li>
-        <li><b>9:00</b> Race! (Less than 1 mile)</li>
         <li>
-          <b>9:19</b> Medal ceremony. Every finisher gets a medal totally made of
-          gold.
+          <b>9:00</b>
+          Race! (Less than 1 mile)
         </li>
-        <li><b>9:26</b> Coffee & donuts. Tend to your pulled hammy</li>
-        <li><b>END</b> Disperse, nap, prepare for evening fireworks</li>
+        <li>
+          <b>9:19</b>
+          Medal ceremony. Every finisher gets a medal totally made of gold.
+        </li>
+        <li>
+          <b>9:26</b>
+          Coffee & donuts. Tend to your pulled hammy
+        </li>
+        <li>
+          <b>END</b>
+          Disperse, nap, prepare for evening fireworks
+        </li>
       </ol>
     </div>
   </section>
@@ -194,14 +314,17 @@
             />
           </label>
           <label class="field">
-            <span>Anything to add? <small>(optional)</small></span>
+            <span>
+              Anything to add? <small>(optional)</small>
+            </span>
             <textarea
               name="comment"
               maxlength="250"
               placeholder="Bringing 46 kids and an irrational competitive streak."
               rows="3"
               bind:value={commentValue}
-            ></textarea>
+            >
+            </textarea>
             <small class="counter">{commentValue.length} / 250</small>
           </label>
 
@@ -268,29 +391,22 @@
 
   <section class="container gallery">
     <header class="gallery-head">
-      <h2>From years past</h2>
+      <h2>Race day, through the years</h2>
     </header>
-    <div class="gallery-grid">
-      <img
-        src="/funrun/schwabauer_family_fun_run_2026-invitation_page_1.avif"
-        alt="2026 invitation"
-        style="object-fit: contain;"
-      />
-      <img
-        src="/funrun/schwabauer_family_fun_run_2025-winners_photo.avif"
-        alt="2025 winners"
-      />
-      <img
-        src="/funrun/schwabauer_family_fun_run_2025-opening_ceremony_speech.avif"
-        alt="2025 opening ceremony speech"
-      />
-      <img
-        src="/funrun/schwabauer_family_fun_run_2024-group_photo.avif"
-        alt="2024 participants"
-      />
-      <img
-        src="/funrun/schwabauer_family_fun_run_2024-winners_photo.avif"
-        alt="2024 winners"
+    <Gallery
+      items={galleryDisplayItems}
+      display="masonry"
+      size="00"
+      meta_display="hover"
+      meta_display_fullscreen="always"
+    />
+
+    <div class="ceremony">
+      <h3>2026 opening ceremony speech</h3>
+      <Video
+        class="ceremony-video"
+        src="{CEREMONY}/master.m3u8"
+        poster="{CEREMONY}/poster.jpg"
       />
     </div>
   </section>
@@ -309,7 +425,8 @@
       <span
         class="bit"
         style="left: {b.left}%; background: {b.color}; animation-delay: {b.delay}s; animation-duration: {b.duration}s; --r: {b.rotate}deg;"
-      ></span>
+      >
+      </span>
     {/each}
   </div>
 {/if}
@@ -806,26 +923,17 @@
     margin-top: 0.4rem;
     font-size: 0.92rem;
   }
-  .gallery-head code {
-    background: var(--c-paper-2);
-    padding: 0.1em 0.45em;
-    border-radius: 4px;
-    font-family: ui-monospace, SFMono-Regular, monospace;
-    font-size: 0.85em;
+  .ceremony {
+    margin-top: clamp(2rem, 5vw, 3.5rem);
   }
-  .gallery-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-    gap: 0.8rem;
-    img {
-      margin: 0;
-      aspect-ratio: 4/3;
-      border-radius: var(--radius);
-      overflow: hidden;
-      background: var(--c-paper-2);
-      border: 1px solid var(--c-line);
-      object-fit: cover;
-    }
+  .ceremony h3 {
+    font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+    font-family: var(--font-display);
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+  .ceremony :global(.ceremony-video) {
+    box-shadow: var(--c-shadow);
   }
 
   .end {

@@ -15,9 +15,11 @@
     "lint": "oxlint . || true"
   },
   "dependencies": {
-    "@delightstack/auth": "workspace:*",
-    "@delightstack/components": "workspace:*",
-    "@delightstack/utilities": "workspace:*"
+    "@delightstack/auth": "^1.0.0",
+    "@delightstack/components": "^1.0.0",
+    "@delightstack/styles": "^1.0.0",
+    "@delightstack/utilities": "^1.0.0",
+    "hls.js": "^1.6.0"
   },
   "devDependencies": {
     "@cloudflare/workers-types": "^4.20260401.1",
